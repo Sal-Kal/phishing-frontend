@@ -1,38 +1,186 @@
-.App {
-  text-align: center;
+* {
+  margin: 0
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: lime;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app {
+  position: relative;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Tilt Area */
+
+.tilt-area {
+  font-size: 5rem;
+  font-weight: bold;
+  position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  text-align: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  color: lime;
 }
 
-.App-link {
-  color: #61dafb;
+.tilt-area[tilted=true] {
+  animation: tilt .35s ease-in-out forwards;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
+.tilt-area[tilted=false] {
+  animation: un-tilt .35s ease-in-out forwards;
+}
+
+/* Nav Bar */
+
+.nav-wrapper {
+  display: flex;
+  font-size: 2.7rem;
+  font-weight: bold;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 20%;
+  height: 100vh;
+  gap: .7rem;
+}
+
+.nav-item {
+  text-align: center;
+  animation: fade-in-right .3s ease-in-out forwards;
+  animation-delay: calc(var(--nav-delay) * 20ms);
+  width: 20rem;
+}
+
+.nav-wrapper[fade=right] > .nav-item {
+  animation: fade-out-right .3s ease-in-out forwards;
+  animation-delay: calc(var(--nav-delay) * 20ms);
+}
+
+/* Content Within Tilt Area */
+
+.content {
+  animation: fade-in .4s ease-in-out forwards;
+}
+
+.content[fade=up] {
+  animation: fade-out-up .4s ease-in-out forwards;
+}
+
+.content[fade=down] {
+  animation: fade-out-down .4s ease-in-out forwards;
+}
+
+/* Burger Icon Within Tilt Area */
+
+.burger-icon {
+  position: absolute;
+  background-color: transparent;
+  border: 0px;
+  right: 2rem;
+  top: 2rem;
+  cursor: pointer;
+}
+
+/* Tilt Animations */
+
+@keyframes tilt {
   from {
-    transform: rotate(0deg);
+    transform: perspective(0) rotateY(0) translateX(9) scale(0);
   }
+
   to {
-    transform: rotate(360deg);
+    transform: perspective(620px) rotateY(20deg) translateX(-18%) scaleX(0.3) scaleY(0.4);
+    border-radius: 1rem;
+  }
+}
+
+@keyframes un-tilt {
+  from {
+    transform: perspective(620px) rotateY(20deg) translateX(-18%) scaleX(0.3) scaleY(0.4);
+    border-radius: 1rem;
+  }
+
+  to {
+    transform: perspective(0) rotateY(0) translateX(9) scale(0);
+  }
+}
+
+/* Fade Animations */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%) scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes fade-out-right {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%) scale(0);
+  }
+}
+
+@keyframes fade-out-up {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes fade-out-down {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
   }
 }
