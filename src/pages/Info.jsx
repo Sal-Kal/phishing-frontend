@@ -132,6 +132,7 @@ const Info = () => {
       <a
         href="https://www.kaggle.com/datasets/eswarchandt/phishing-website-detector"
         target="_blank"
+        rel="noreferrer"
         style={{ fontsize: "1.5rem", color: "white", fontFamily: "Poppins" }}
       >
         click here
