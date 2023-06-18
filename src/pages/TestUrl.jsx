@@ -20,7 +20,7 @@ const TestUrl = () => {
   const word = "LOADING...";
 
   const handleStroke = (event) => {
-    const { name, value } = event.target;
+    const value = event.target.value;
     setUrl(value);
   };
 
@@ -55,29 +55,6 @@ const TestUrl = () => {
     }, 9);
     return () => clearInterval(interval);
   }, [result.score]);
-
-  useEffect(() => {
-    let itr = 0;
-    const interval = setInterval(() => {
-      setLoaderText((prevText) => {
-        return prevText
-          .split("")
-          .map((letter, index) => {
-            if (index < itr) {
-              return word[index];
-            } else {
-              return letters[Math.floor(Math.random() * 26)];
-            }
-          })
-          .join("");
-      });
-      if (itr === word.length * 2.5) {
-        itr = 0;
-      }
-      itr += 1;
-    }, 70);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     let itr = 0;
@@ -168,6 +145,7 @@ const TestUrl = () => {
                   href={url}
                   target="_blank"
                   style={{ fontsize: "1.5rem", color: "white" }}
+                  rel="noreferrer"
                 >
                   {/* <button classname="loader" navigate="true">
                     continue to website
@@ -182,6 +160,7 @@ const TestUrl = () => {
                   href={url}
                   target="_blank"
                   style={{ fontSize: "1.5rem", color: "white" }}
+                  rel="noreferrer"
                 >
                   {/* <button className="loader" navigate="true">
                     Continue to Website

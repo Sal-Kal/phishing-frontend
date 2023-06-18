@@ -17,12 +17,12 @@ const AboutPhishing = () => {
           textAlign: "center",
           marginBlock: "1rem",
           // fontFamily: "Poppins",
-          fontFamily: "Researcher Regular",
+          fontFamily: "Researcher Squid",
         }}
       >
-        What is Phishing Attack ?
+        Phishing Attacks
       </h4>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", marginTop: "2rem" }}>
         <p
           style={{
             fontSize: "1.7rem",
