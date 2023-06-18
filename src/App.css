@@ -1,3 +1,24 @@
+@font-face {
+  font-family: 'Researcher Regular';
+  src: url('./fonts/researcher/ttf/researcher-researcher-regular-400.ttf');
+}
+
+@font-face {
+  font-family: 'Researcher Bold';
+  src: url('./fonts/researcher/ttf/researcher-researcher-bold-700.ttf');
+}
+
+@font-face {
+  font-family: 'Researcher Squid';
+  src: url('./fonts/researcher/ttf/researcher-researcher-squid-700.ttf');
+}
+
+@font-face {
+  font-family: 'Researcher Thin';
+  src: url('./fonts/researcher/ttf/researcher-researcher-thin-200.ttf');
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -5,10 +26,24 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Space Mono', monospace;
   background-color: black;
-  color: #78ffd6;
+  color: white;
 }
+
+li {
+  margin-block: 1rem;
+}
+
+li::marker {
+  font-weight: bold;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
 
 .app {
   position: relative;
@@ -17,7 +52,6 @@ body {
 /* Tilt Area */
 
 .tilt-area {
-  font-size: 5rem;
   font-weight: bold;
   position: relative;
   display: flex;
@@ -26,7 +60,7 @@ body {
   text-align: center;
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient(to right, #007991, #78ffd6);
+  background-image: linear-gradient(to right, white, blue);
   overflow: hidden;
 }
 
@@ -52,7 +86,7 @@ body {
 .nav-wrapper {
   display: flex;
   gap: 1.5rem;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 1000;
   flex-direction: column;
   justify-content: center;
@@ -63,10 +97,12 @@ body {
 }
 
 .nav-item {
+  font-family: 'Researcher Squid';
   text-align: center;
   animation: fade-in-right .35s ease-in-out forwards;
   animation-delay: calc(var(--nav-delay) * 60ms);
   width: 20rem;
+  cursor: pointer;
 }
 
 .nav-wrapper[fade=right] {
@@ -77,6 +113,9 @@ body {
 
 .content-wrapper {
   background-color: black;
+  /* background-image: url(./assets/bg3.jpeg); */
+  /* background-image: url();
+  background-size: cover; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,36 +126,36 @@ body {
   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
 }
 
+/* .content-wrapper[test=true] {
+  background-size: auto;
+  background-image: url();
+} */
+
 .content {
-  z-index: 3;
+  z-index: 2;
+  width: 90%;
+  height: 75%;
+  font-size: 3rem;
 }
 
-.content-wrapper>.content {
-  animation: fade-in .4s ease-in-out forwards;
-}
-
-.content-wrapper[fade=up]>.content {
-  animation: fade-out-up .4s ease-in-out forwards;
-}
-
-.content-wrapper[fade=down]>.content {
-  animation: fade-out-down .4s ease-in-out forwards;
+.content-wrapper>.content>div {
+  animation: fade-in 1s ease-in-out forwards;
 }
 
 /* Blob */
 #blob {
   background-color: white;
-  height: 500px;
+  height: 600px;
   aspect-ratio: 1;
   position: absolute;
   left: 50%;
   top: 50%;
   translate: -50% -50%;
   border-radius: 50%;
-  background: linear-gradient(to right, aquamarine, mediumpurple );
-
-  animation: rotate 15s infinite;
+  background: linear-gradient(to right, aquamarine, mediumpurple);
+  animation: rotate 9s infinite;
   filter: blur(1200px);
+  /* display: none; */
 }
 
 /* Blur */
@@ -124,8 +163,9 @@ body {
   height: 100%;
   width: 100%;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   backdrop-filter: blur(1200px);
+  /* display: none; */
 }
 
 /* Burger Icon Within Tilt Area */
@@ -137,7 +177,89 @@ body {
   right: 5rem;
   top: 4rem;
   cursor: pointer;
-  z-index: 5;
+  z-index: 3;
+}
+
+.loader {
+  font-family: 'Researcher Bold';
+  /* font-family: 'Space Mono'; */
+  text-align: center;
+  height: 5rem;
+  width: 25rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-inline: auto;
+  margin-block: 1rem;
+  padding-inline: 2rem;
+  /* padding-block: 1rem; */
+  padding-top: 0.6rem;
+  background-color: white;
+  color: black;
+  clip-path:
+    polygon(0% 0%,
+      95% 0%,
+      100% .7em,
+      100% 100%,
+      100% 100%,
+      .7em 100%,
+      0% 78%,
+      0% 30%);
+  border: 0;
+  /* animation: load 2s infinite; */
+}
+
+#disclaimer {
+  font-size: 1.7rem;
+  text-align: justify;
+  width: 90%;
+  font-family: 'Poppins';
+  font-weight: 200;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+#disclaimer[fade=true] {
+  animation: fade-out .3s forwards;
+}
+
+#disclaimer[display=false] {
+  display: none;
+}
+
+.CircularProgressbar-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(-22px) translateY(3px);
+}
+
+.loader[loading=true] {
+  animation: load 2s infinite;
+}
+
+/* .loader[navigate=true] {
+  transform: scale(0.8);
+  font-family: 'Space Mono';
+} */
+
+
+/* Loading Animation */
+@keyframes load {
+  from {
+    background-color: black;
+    color: white;
+  }
+
+  50% {
+    background-color: white;
+    color: black;
+  }
+
+  to {
+    background-color: black;
+    color: white;
+  }
 }
 
 /* Tilt Animations */
@@ -145,14 +267,14 @@ body {
 @keyframes tilt {
   from {
     transform: perspective(0) rotateY(0) translateX(9) scale(0);
-    border-radius: 0rem;
+    /* border-radius: 0rem; */
     border: 0px solid grey;
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   }
 
   to {
     transform: perspective(620px) rotateY(20deg) translateX(-20%) scaleX(0.25) scaleY(0.35);
-    border-radius: 3rem;
+    /* border-radius: 3rem; */
     border: 4px solid grey;
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
   }
@@ -161,14 +283,14 @@ body {
 @keyframes un-tilt {
   from {
     transform: perspective(620px) rotateY(20deg) translateX(-20%) scaleX(0.25) scaleY(0.35);
-    border-radius: 3rem;
+    /* border-radius: 3rem; */
     border: 4px solid grey;
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
   }
 
   to {
     transform: perspective(0) rotateY(0) translateX(9) scale(0);
-    border-radius: 0rem;
+    /* border-radius: 0rem; */
     border: 0px solid grey;
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   }
@@ -183,6 +305,16 @@ body {
 
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }
 
@@ -253,15 +385,15 @@ body {
   }
 
   to {
-    height: 93%;
-    width: 95%;
+    height: 99%;
+    width: 99%;
   }
 }
 
 @keyframes expand {
   from {
-    height: 93%;
-    width: 95%;
+    height: 99%;
+    width: 99%;
   }
 
   to {
@@ -273,15 +405,36 @@ body {
 @keyframes rotate {
   from {
     rotate: 0deg;
-    scale: 0.95 1;
+    scale: 0.9 1;
   }
 
   50% {
-    scale: 1 1;
+    scale: 1 0.9;
   }
 
   to {
     rotate: 360deg;
-    scale: 0.95 1;
+    scale: 0.9 1;
   }
+}
+
+@keyframes go-up {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-200px);
+  }
+}
+
+@keyframes go-down {
+  from {
+    transform: translateY(-200px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+
 }
